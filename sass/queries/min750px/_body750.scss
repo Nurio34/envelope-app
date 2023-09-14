@@ -1,0 +1,60 @@
+@media (min-width:750px) {
+    
+    
+:root {
+    --body : white;
+}
+
+:root:has(body.night) {
+    --body : black;
+}
+
+body {
+
+    .msg {
+
+
+        p,span {
+
+        }
+    
+        span {
+
+        }
+    }
+    
+
+    .photos-wrapper {
+
+        i {
+
+        }
+
+        picture {
+            width: 700px;
+            aspect-ratio: 16/9;
+            img {
+
+                &.small {
+                    @keyframes toSmall {
+                        100% {
+                            transform: scale(0.2) translate(var(--left),var(--top)) rotateY(360deg) rotateZ(var(--rotZ));
+                            z-index: -1;
+                        }
+                    }
+                }
+
+                &.big {
+
+                }
+
+                &.big-to-small {
+
+                }
+            }
+        }
+    }
+}
+
+
+}

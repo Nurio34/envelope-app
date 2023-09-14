@@ -1,0 +1,237 @@
+
+:root {
+    --body : white;
+
+    img[data-num="1"] {
+        --top:-400%; 
+        --left: -70%; 
+        --rotZ: -50deg
+    }
+
+    img[data-num="2"] {
+        --top:-325%; 
+        --left: 200%; 
+        --rotZ: 25deg
+    }
+
+    img[data-num="3"] {
+        --top:-425%; 
+        --left: -140%; 
+        --rotZ: -75deg
+    }
+
+    img[data-num="4"] {
+        --top:-300%; 
+        --left: 0%; 
+        --rotZ: 50deg
+    }
+
+    img[data-num="5"] {
+        --top:-275%; 
+        --left: 70%; 
+        --rotZ: 0deg
+    }
+
+    img[data-num="6"] {
+        --top:-375%; 
+        --left: 140%; 
+        --rotZ: -25deg
+    }
+
+    img[data-num="7"] {
+        --top:-350%; 
+        --left: -200%; 
+        --rotZ: 75deg
+    }
+
+}
+
+
+body {
+    padding: min(5vw,37.5px);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background: linear-gradient(45deg, pink, rgb(192, 80, 192),rgb(82, 0, 82));
+
+    .msg {
+        position: relative;
+        z-index: 1;
+        color: white;
+
+        p,span {
+            display:inline;
+            font-size: min(4vw,30px);
+        }
+    
+        span {
+            padding-inline-end: 0.2rem;
+            position: relative;
+            color: red;
+    
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;left: min(1vw,7.5px);width: 100%;height: 100%;
+                border-right: min(1vw,6.36px) solid red;
+                padding-inline-end: 0.2rem;
+                animation: lamb 1s infinite;
+    
+    
+            }
+    
+    
+            @keyframes lamb {
+                50% {
+                    border-right: transparent;
+    
+                }
+            }
+        }
+    }
+
+    .photos-wrapper {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        isolation: isolate;
+
+        i {
+            display: block;
+            position: relative;
+            z-index: 0;
+            font-size: min(50vw, 375px);
+        }
+
+        picture {
+            position: absolute;
+            z-index: -1;
+            top: 50%;left: 50%;
+            transform: translate(-50%,-40%);
+
+            width: calc(900px/4);
+            height: calc(1600px / 4);
+
+
+            img {
+                display: block;
+                position: relative;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                z-index: 2;
+                transform: scale(0.001) ;
+
+                border: 2px solid;
+                border-radius: 3rem;
+                box-shadow: 0 0 5px 1px purple;
+
+                &.small {
+                    animation: toSmall 1s forwards ;
+
+                    @keyframes toSmall {
+                        100% {
+                            transform: scale(0.2) translate(var(--left),calc(var(--top) / 1.3)) rotateY(360deg) rotateZ(var(--rotZ));
+                            z-index: -1;
+                        }
+                    }
+                }
+
+                &.big {
+                    border: 0;
+                    animation: toBig 1s forwards, shadow 1s infinite;
+
+                    @keyframes toBig {
+                        0% {
+                            transform: scale(0.2) translate(var(--left),var(--top)) rotateY(360deg) rotateZ(var(--rotZ));
+                        }
+
+                        100% {
+                            transform: scale(1) translate(0,0) rotateY(360deg) rotateZ(0);
+                            z-index: 1;
+                        }
+                    }
+
+                    @keyframes shadow {
+                        50%{
+                            box-shadow: 0 0 10px 2px purple,
+                            0 0 15px 3px purple ,
+                            0 0 20px 4px purple
+                            ;
+
+                        }
+                    }
+                }
+
+                &.big-to-small {
+                    animation: bigToSmall 1s forwards;
+
+                    @keyframes bigToSmall {
+                        0%{
+                            transform: scale(1) translate(0,0) rotateY(360deg) rotateZ(0);
+                        }
+                        100% {
+                            transform: scale(0.2) translate(var(--left),var(--top)) rotateY(360deg) rotateZ(var(--rotZ));
+                            z-index: -1;
+                        }
+                    }
+                }
+            }
+        }
+
+        .msg-text {
+            font-size: min(4vw,30px);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+    
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%; left: -20%;
+                width: 10%; height: 200%;
+                background: linear-gradient(45deg,rgba(255, 255, 255, 0.4),rgba(253, 223, 223, 0.4));
+                transform: translateY(-50%) rotate(45deg);
+
+                animation: move 4s infinite;
+
+                @keyframes move {
+                    25%,100% {
+                        left: 120%;
+                    }
+                }
+            }
+
+            &.hidden {
+                display: none;
+            }
+        }
+
+        .pointer {
+
+            i {
+                visibility: hidden;
+                font-size: 1rem;
+                color: white;
+                pointer-events: none;
+                
+
+                &.moving {
+                    visibility: visible;
+                    position: absolute;
+                    z-index: 2;
+                    top: 50%; left: 50%; transform: translate(-50%,-50%) rotateZ(135deg);
+                    animation: point 1s infinite;
+
+                    @keyframes point {
+                        50% {
+                            transform: translate(-50%,-150%) rotateZ(135deg)
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+
+    
+}
+
